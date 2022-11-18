@@ -21,8 +21,8 @@ public class RubyController : MonoBehaviour
         Vector2 position = transform.position;
 
         //changing the x and y position 
-        position.x = position.x + 3.0f * horizontal * Time.deltaTime;
-        position.y = position.y + 3.0f * vertical * Time.deltaTime;
+        position.x = position.x + 5.0f * horizontal * Time.deltaTime;
+        position.y = position.y + 5.0f * vertical * Time.deltaTime;
 
         //set the update position
         transform.position = position;
