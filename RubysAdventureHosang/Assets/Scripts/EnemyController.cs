@@ -9,11 +9,14 @@ public class EnemyController : MonoBehaviour
     public bool vertical;
     public float changeTime = 3.0f;
 
-    Rigidbody2D rigidbody2D;
+ 
     float timer;
     int direction = 1;
 
     Animator animator;
+    Rigidbody2D rigidbody2D;
+
+    bool broken;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,7 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-     void Update()
+    void Update()
     {
         timer -= Time.deltaTime;
 
@@ -31,6 +34,13 @@ public class EnemyController : MonoBehaviour
         {
             direction = -direction;
             timer = changeTime;
+        }
+
+
+
+        if (!broken)
+        {
+            return;
         }
     }
 
@@ -53,6 +63,11 @@ public class EnemyController : MonoBehaviour
         }
 
         rigidbody2D.MovePosition(position);
+
+        if (!broken)
+        {
+            return;
+        }
     }
 
 
@@ -64,7 +79,24 @@ public class EnemyController : MonoBehaviour
         {
             player.ChangeHealth(-1);
         }
+
+        EnemyController e = other.collider.GetComponent<EnemyController>();
+        if (e != null)
+        {
+            e.Fix();
+        }
+
+        Destroy(gameObject);
+
     }
 
     
+    public void Fix()
+    {
+        broken = false;
+        rigidbody2D.simulated = false;
+    }
+
+
+
 }

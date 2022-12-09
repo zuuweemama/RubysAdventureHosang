@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
@@ -29,12 +29,12 @@ public class Projectile : MonoBehaviour
     }
 
 
-
-
-
     // Update is called once per frame
     void Update()
     {
-        
+        if(transform.position.magnitude > 1000.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }
