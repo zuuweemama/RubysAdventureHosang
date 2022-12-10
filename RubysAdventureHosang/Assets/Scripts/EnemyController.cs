@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Move Y", 0);
         }
 
-        rigidbody2D.MovePosition(position);
+        GetComponent<Rigidbody2D>().MovePosition(position);
 
         if (!broken)
         {
@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        RubyController player = other.gameObject.GetComponent<RubyController >();
+        RubyController player = other.gameObject.GetComponent<RubyController>();
 
         if (player != null)
         {
@@ -94,6 +94,7 @@ public class EnemyController : MonoBehaviour
     public void Fix()
     {
         broken = false;
+        rigidbody2D.simulated = false;
         rigidbody2D.simulated = false;
     }
 
